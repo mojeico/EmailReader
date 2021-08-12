@@ -1,18 +1,18 @@
 package models;
 
-public class Smtp {
+public class Pop3 {
 
-    public String email;
-    public String pass;
-    public String server;
-    public Integer port;
-    public Boolean ssl;
+    private String email;
+    private String pass;
+    private String host;
+    private Integer port;
+    private Boolean ssl;
 
 
-    public Smtp(String email, String pass, String server, Integer port, Boolean ssl) {
+    public Pop3(String email, String pass, String server, Integer port, Boolean ssl) {
         this.email = email;
         this.pass = pass;
-        this.server = server;
+        this.host = server;
         this.port = port;
         this.ssl = ssl;
     }
@@ -33,12 +33,12 @@ public class Smtp {
         this.pass = pass;
     }
 
-    public String getServer() {
-        return server;
+    public String getHost() {
+        return host;
     }
 
-    public void setServer(String server) {
-        this.server = server;
+    public void setHost(String host) {
+        this.host = host;
     }
 
     public Integer getPort() {
@@ -63,7 +63,7 @@ public class Smtp {
         return "Smtp{" +
                 "email='" + email + '\'' +
                 ", pass='" + pass + '\'' +
-                ", server='" + server + '\'' +
+                ", host='" + host + '\'' +
                 ", port=" + port +
                 ", ssl=" + ssl +
                 '}';

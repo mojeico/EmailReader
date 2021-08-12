@@ -1,13 +1,19 @@
 package mail;
 
 import helper.Helper;
+import models.Imap;
 
-import java.util.*;
 import javax.mail.*;
+import java.util.Properties;
+import java.util.Set;
 
 public class ReceiveMailImap {
 
-    public ReceiveMailImap() {
+    Imap imap;
+
+
+    public ReceiveMailImap(Imap imap) {
+        this.imap = imap;
     }
 
     public void getMessage(Set<String> setEmails) throws MessagingException {
@@ -20,7 +26,7 @@ public class ReceiveMailImap {
             Session session = Session.getDefaultInstance(props, null);
             //session.setDebug(true);
             store = session.getStore("imaps");
-            store.connect("imap.gmail.com", "", "");
+            store.connect(imap.getHost(), imap.getEmail(), imap.getPass());
 
             folder = store.getFolder("[Gmail]/All Mail");
             /* Others GMail folders :

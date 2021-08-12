@@ -1,17 +1,11 @@
 package mail;
 
 import helper.Helper;
+import models.Pop3;
 
+import javax.mail.*;
 import java.util.Properties;
 import java.util.Set;
-
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.NoSuchProviderException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Store;
 
 public class ReceiveMailPop3 {
 
@@ -19,24 +13,29 @@ public class ReceiveMailPop3 {
     private Session session = null;
     private Store store = null;
     private Folder inbox = null;
-    private String userName = "";// provide user name
-    private String password = "";// provide password
 
-    public ReceiveMailPop3() {
+    public Pop3 pop3;
+
+    public ReceiveMailPop3(Pop3 pop3) {
+        this.pop3 = pop3;
     }
 
     public void getMessage(Set<String> setEmails) {
+
         properties = new Properties();
+
         properties.setProperty("mail.pop3.socketFactory.class",
                 "javax.net.ssl.SSLSocketFactory");
+
         properties.setProperty("mail.pop3.socketFactory.fallback", "false");
-        properties.setProperty("mail.pop3.host", "pop.gmail.com");
-        properties.setProperty("mail.pop3.port", "995");
-        properties.setProperty("mail.pop3.socketFactory.port", "995");
+        properties.setProperty("mail.pop3.host", pop3.getHost());
+        properties.setProperty("mail.pop3.port", String.valueOf(pop3.getPort()));
+        properties.setProperty("mail.pop3.socketFactory.port", String.valueOf(pop3.getPort()));
+
         session = Session.getInstance(properties,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(userName, password);
+                        return new PasswordAuthentication(pop3.getEmail(), pop3.getPass());
                     }
                 });
 
@@ -53,6 +52,10 @@ public class ReceiveMailPop3 {
         } catch (NoSuchProviderException e) {
             e.printStackTrace();
         } catch (MessagingException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }

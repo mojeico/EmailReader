@@ -1,13 +1,12 @@
-
 import helper.JSONReadFromFile;
 import mail.ReceiveMailImap;
 import mail.ReceiveMailPop3;
 import models.Email;
 
+import javax.mail.MessagingException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.mail.*;
 
 public class Main {
 
@@ -18,16 +17,21 @@ public class Main {
 
         System.out.println(emailList);
 
-
         Set<String> setEmails = new HashSet<>();
 
-        ReceiveMailPop3 pop3 = new ReceiveMailPop3();
-        pop3.getMessage(setEmails);
+        for (Email email : emailList) {
 
-        ReceiveMailImap imap = new ReceiveMailImap();
-        imap.getMessage(setEmails);
 
-        System.out.println(setEmails);
+            ReceiveMailPop3 pop3 = new ReceiveMailPop3(email.getPop3());
+            pop3.getMessage(setEmails);
+
+            ReceiveMailImap imap = new ReceiveMailImap(email.getImap());
+            imap.getMessage(setEmails);
+
+        }
+
+        System.out.println(setEmails.size());
+
 
     }
 }
