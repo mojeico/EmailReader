@@ -33,6 +33,5 @@ public class Main {
         System.out.println("Email count - " + setEmails.size());
         System.out.println("Email list - " + setEmails);
 
-
     }
 }

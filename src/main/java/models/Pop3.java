@@ -8,7 +8,6 @@ public class Pop3 {
     private Integer port;
     private Boolean ssl;
 
-
     public Pop3(String email, String pass, String server, Integer port, Boolean ssl) {
         this.email = email;
         this.pass = pass;
@@ -56,7 +55,6 @@ public class Pop3 {
     public void setSsl(Boolean ssl) {
         this.ssl = ssl;
     }
-
 
     @Override
     public String toString() {

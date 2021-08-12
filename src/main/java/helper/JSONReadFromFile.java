@@ -49,9 +49,7 @@ public class JSONReadFromFile {
                 Email email = gson.fromJson(iterator.next().toJSONString(), Email.class);
                 emailList.add(email);
             }
-
             return emailList;
-
         } catch (Exception e) {
             e.printStackTrace();
         }

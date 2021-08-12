@@ -9,9 +9,9 @@ import java.util.Set;
 public class Helper {
 
     public static void GetAllEmails(Set<String> setEmails, Message[] messagesImap) {
-        for (int i = 0; i < messagesImap.length; i++) {
 
-            Message message = messagesImap[i];
+        for (Message message : messagesImap) {
+
             Address[] to = new Address[0];
             Address[] from = new Address[0];
 
@@ -35,8 +35,6 @@ public class Helper {
                 String sender = ((InternetAddress) addressFrom).getAddress();
                 setEmails.add(sender);
             }
-
         }
     }
-
 }

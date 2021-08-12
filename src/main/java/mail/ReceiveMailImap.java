@@ -11,14 +11,15 @@ public class ReceiveMailImap {
 
     Imap imap;
 
-
     public ReceiveMailImap(Imap imap) {
         this.imap = imap;
     }
 
     public void getMessage(Set<String> setEmails) throws MessagingException {
+
         Folder folder = null;
         Store store = null;
+
         try {
             Properties props = System.getProperties();
             props.setProperty("mail.store.protocol", "imaps");
@@ -41,8 +42,6 @@ public class ReceiveMailImap {
             folder.open(Folder.READ_WRITE);
             Message[] messagesImap = folder.getMessages();
             Helper.GetAllEmails(setEmails, messagesImap);
-            System.out.println("All imap email address was save in set");
-
 
         } finally {
             if (folder != null) {
@@ -53,6 +52,4 @@ public class ReceiveMailImap {
             }
         }
     }
-
-
 }

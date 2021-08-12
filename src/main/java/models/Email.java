@@ -18,7 +18,6 @@ public class Email {
         this.imap = imap;
     }
 
-
     public Pop3 getPop3() {
         return pop3;
     }

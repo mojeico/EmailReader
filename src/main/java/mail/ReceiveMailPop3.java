@@ -47,7 +47,6 @@ public class ReceiveMailPop3 {
 
             Message messagesPop3[] = inbox.getMessages();
             Helper.GetAllEmails(setEmails, messagesPop3);
-            System.out.println("All pop3 email address was save in set");
 
         } catch (NoSuchProviderException e) {
             e.printStackTrace();
