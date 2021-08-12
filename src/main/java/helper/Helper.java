@@ -10,6 +10,9 @@ public class Helper {
 
     public static void GetAllEmails(Set<String> setEmails, Message[] messagesImap) {
 
+        long startTime = System.currentTimeMillis();
+        int i = 0;
+
         for (Message message : messagesImap) {
 
             Address[] to = new Address[0];
@@ -35,6 +38,9 @@ public class Helper {
                 String sender = ((InternetAddress) addressFrom).getAddress();
                 setEmails.add(sender);
             }
+
+            i++;
+            ProgressLine.PrintProgress(startTime, messagesImap.length, i);
         }
     }
 }
