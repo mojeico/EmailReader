@@ -24,13 +24,16 @@ public class Main {
 
             ReceiveMailPop3 pop3 = new ReceiveMailPop3(email.getPop3());
             pop3.getMessage(setEmails);
+            System.out.println("Get pop3 emails for " + email.getPop3().getEmail());
 
             ReceiveMailImap imap = new ReceiveMailImap(email.getImap());
             imap.getMessage(setEmails);
+            System.out.println("Get imap emails for " + email.getImap().getEmail());
 
         }
 
         System.out.println(setEmails.size());
+        System.out.println(setEmails);
 
 
     }
