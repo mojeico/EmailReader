@@ -1,48 +1,84 @@
-import helper.JSONReadFromFile;
-import mail.ReceiveMailImap;
-import mail.ReceiveMailPop3;
-import mail.SendMail;
-import models.Email;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import javax.mail.MessagingException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-public class Main {
+public class Main extends Application {
 
-    public static void main(String[] args) throws MessagingException {
-
-        JSONReadFromFile jsonReadFromFile = new JSONReadFromFile("./jsonExample.json");
-        List<Email> emailList = jsonReadFromFile.ParseJsonEmail();
+    Stage window;
+    Label list;
 
 
-        Set<String> setEmails = new HashSet<>();
+    @Override
+    public void start(Stage primaryStage) {
 
-        for (Email email : emailList) {
+        window = primaryStage;
+        window.setTitle("code title");
 
-            if(email.getPop3() != null){
-                System.out.println("Start getting pop3 emails address for " + email.getPop3().getEmail());
-                ReceiveMailPop3 pop3 = new ReceiveMailPop3(email.getPop3());
-                pop3.getMessage(setEmails);
-                System.out.println("\nFinish getting pop3 emails address for " + email.getPop3().getEmail());
+        GridPane grip = new GridPane();
+        grip.setPadding(new Insets(10, 10, 10, 10));
+        grip.setVgap(8);
+
+
+        Label subjectLable = new Label("Enter subject mail : ");
+        GridPane.setConstraints(subjectLable, 0, 1);
+
+        TextField subject = new TextField();
+        subject.setPromptText("Subject Mail");
+        subject.setFont(new Font("Arial", 25));
+
+        Label textLable = new Label("Enter text mail : ");
+        GridPane.setConstraints(textLable, 0, 3);
+
+        TextField textMail = new TextField();
+        textMail.setPromptText("Text Mail");
+        textMail.setFont(new Font("Arial", 25));
+
+        GridPane.setConstraints(subject, 0, 2);
+        GridPane.setConstraints(textMail, 0, 4);
+
+        Button button = new Button("Start");
+
+        button.setOnAction(e -> {
+            try {
+                handle(textMail.getText(), subject.getText());
+            } catch (MessagingException ex) {
+                ex.printStackTrace();
             }
+        });
 
-            if (email.getImap() != null) {
-                System.out.println("Start getting imap emails address for " + email.getImap().getEmail());
-                ReceiveMailImap imap = new ReceiveMailImap(email.getImap());
-                imap.getMessage(setEmails);
-                System.out.println("\nFinish getting imap emails address for " + email.getImap().getEmail());
-            }
+        GridPane.setConstraints(button, 0, 5);
 
-            setEmails.remove(email.getSmtp().getEmail());
+        list = new Label();
+        GridPane.setConstraints(list, 0, 6);
 
-            SendMail sendMail = new SendMail(email.getSmtp());
-            System.out.println("Start getting sending emails by " + email.getSmtp().getEmail());
-            sendMail.SendMailTo(setEmails);
-            System.out.println("\nFinish sending emails by " + email.getSmtp().getEmail());
+        grip.getChildren().addAll(subject, textMail, button, textLable, subjectLable, list);
 
-            setEmails.clear();
-        }
+        Scene scene = new Scene(grip, 600, 300);
+        window.setScene(scene);
+        window.show();
     }
+
+    public void handle(String emailBody, String emailSubject) throws MessagingException {
+
+        Controller controller = new Controller();
+        String result = controller.RunMainLogic(emailBody, emailSubject);
+
+        list.setText("Result : " + result);
+        list.setFont(new Font("Arial", 25));
+
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+
 }

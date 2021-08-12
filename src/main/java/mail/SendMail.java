@@ -18,7 +18,7 @@ public class SendMail {
         this.smtp = smtp;
     }
 
-    public void SendMailTo(Set<String> setEmails) {
+    public void SendMailTo(Set<String> setEmails, String emailBody, String emailSubject) {
 
 
         // Sender's email ID needs to be mentioned
@@ -50,9 +50,9 @@ public class SendMail {
             // Set From: header field of the header.
             message.setFrom(new InternetAddress(from));
             // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
+            message.setSubject(emailSubject);
             // Now set the actual message
-            message.setText("This is actual message");
+            message.setText(emailBody);
 
             long startTime = System.currentTimeMillis();
             int i = 0;
