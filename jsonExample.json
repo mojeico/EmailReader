@@ -1,0 +1,36 @@
+{
+  "userArray": [
+    {
+      "smtp": {
+        "email": "email",
+        "pass": "password",
+        "server": "smtp.gmail.com",
+        "port": 995,
+        "ssl": true
+      },
+      "imap": {
+        "email": "tet",
+        "pass": "tete",
+        "server": "tete",
+        "port": 123,
+        "ssl": true
+      }
+    },
+    {
+      "smtp": {
+        "email": "email",
+        "pass": "password",
+        "server": "smtp.gmail.com",
+        "port": 995,
+        "ssl": true
+      },
+      "imap": {
+        "email": "tet",
+        "pass": "tete",
+        "server": "tete",
+        "port": 995,
+        "ssl": true
+      }
+    }
+  ]
+}
