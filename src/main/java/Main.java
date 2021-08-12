@@ -14,21 +14,19 @@ public class Main {
 
         JSONReadFromFile jsonReadFromFile = new JSONReadFromFile("./jsonExample.json");
         List<Email> emailList = jsonReadFromFile.ParseJsonEmail();
-
-        System.out.println(emailList);
-
         Set<String> setEmails = new HashSet<>();
 
         for (Email email : emailList) {
 
-
+            System.out.println("Start getting pop3 emails address for " + email.getPop3().getEmail());
             ReceiveMailPop3 pop3 = new ReceiveMailPop3(email.getPop3());
             pop3.getMessage(setEmails);
-            System.out.println("Get pop3 emails for " + email.getPop3().getEmail());
+            System.out.println("Get pop3 emails address for " + email.getPop3().getEmail());
 
+            System.out.println("Start getting imap emails address for " + email.getImap().getEmail());
             ReceiveMailImap imap = new ReceiveMailImap(email.getImap());
             imap.getMessage(setEmails);
-            System.out.println("Get imap emails for " + email.getImap().getEmail());
+            System.out.println("Get imap emails address for " + email.getImap().getEmail());
 
         }
 
