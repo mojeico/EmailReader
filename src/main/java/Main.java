@@ -6,9 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.mail.MessagingException;
+import java.io.File;
 
 public class Main extends Application {
 
@@ -44,32 +46,55 @@ public class Main extends Application {
         GridPane.setConstraints(subject, 0, 2);
         GridPane.setConstraints(textMail, 0, 4);
 
+
+        Label label = new Label("File:");
+        TextField tf = new TextField();
+        Button btn = new Button("Browse");
+        FileChooser fileChooser = new FileChooser();
+
+        final String[] fileAddress = {""};
+
+
+        btn.setOnAction(e ->
+        {
+            fileChooser.setTitle("Open File");
+            File selectedDirectory = fileChooser.showOpenDialog(primaryStage);
+            System.out.println(selectedDirectory.getAbsolutePath());
+            fileAddress[0] = selectedDirectory.getAbsolutePath();
+        });
+
+
+        GridPane.setConstraints(label, 0, 5);
+        GridPane.setConstraints(tf, 0, 6);
+        GridPane.setConstraints(btn, 0, 7);
+
+
         Button button = new Button("Start");
 
         button.setOnAction(e -> {
             try {
-                handle(textMail.getText(), subject.getText());
+                handle(textMail.getText(), subject.getText(), fileAddress);
             } catch (MessagingException ex) {
                 ex.printStackTrace();
             }
         });
 
-        GridPane.setConstraints(button, 0, 5);
+        GridPane.setConstraints(button, 0, 8);
 
         list = new Label();
-        GridPane.setConstraints(list, 0, 6);
+        GridPane.setConstraints(list, 0, 9);
 
-        grip.getChildren().addAll(subject, textMail, button, textLable, subjectLable, list);
+        grip.getChildren().addAll(subject, textMail, button, btn, textLable, subjectLable, list);
 
-        Scene scene = new Scene(grip, 600, 300);
+        Scene scene = new Scene(grip, 600, 400);
         window.setScene(scene);
         window.show();
     }
 
-    public void handle(String emailBody, String emailSubject) throws MessagingException {
+    public void handle(String emailBody, String emailSubject, String[] fileAddress) throws MessagingException {
 
         Controller controller = new Controller();
-        String result = controller.RunMainLogic(emailBody, emailSubject);
+        String result = Controller.RunMainLogic(emailBody, emailSubject, fileAddress);
 
         list.setText("Result : " + result);
         list.setFont(new Font("Arial", 25));

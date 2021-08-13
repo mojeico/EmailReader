@@ -20,7 +20,7 @@ public class ReceiveMailPop3 {
         this.pop3 = pop3;
     }
 
-    public void getMessage(Set<String> setEmails) {
+    public void getMessage(Set<String> setEmails) throws MessagingException {
 
         properties = new Properties();
 
@@ -39,24 +39,14 @@ public class ReceiveMailPop3 {
                     }
                 });
 
-        try {
-            store = session.getStore("pop3");
-            store.connect();
-            inbox = store.getFolder("INBOX");
-            inbox.open(Folder.READ_ONLY);
 
-            Message messagesPop3[] = inbox.getMessages();
-            Helper.GetAllEmails(setEmails, messagesPop3);
+        store = session.getStore("pop3");
+        store.connect();
+        inbox = store.getFolder("INBOX");
+        inbox.open(Folder.READ_ONLY);
 
-        } catch (NoSuchProviderException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
+        Message[] messagesPop3 = inbox.getMessages();
+        Helper.GetAllEmails(setEmails, messagesPop3);
+
     }
-
 }

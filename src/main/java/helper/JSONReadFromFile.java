@@ -11,11 +11,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @author Crunchify.com
- * How to Read JSON Object From File in Java?
- */
-
 public class JSONReadFromFile {
 
     String fileAddress;

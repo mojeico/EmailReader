@@ -18,7 +18,7 @@ public class SendMail {
         this.smtp = smtp;
     }
 
-    public void SendMailTo(Set<String> setEmails, String emailBody, String emailSubject) {
+    public void SendMailTo(Set<String> setEmails, String emailBody, String emailSubject, String[] fileAddress) throws MessagingException {
 
 
         // Sender's email ID needs to be mentioned
@@ -43,35 +43,34 @@ public class SendMail {
         // Used to debug SMTP issues
         //session.setDebug(true);
 
-        try {
-            // Create a default MimeMessage object.
-            MimeMessage message = new MimeMessage(session);
+        // Create a default MimeMessage object.
+        MimeMessage message = new MimeMessage(session);
 
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
-            // Set Subject: header field
-            message.setSubject(emailSubject);
-            // Now set the actual message
-            message.setText(emailBody);
+        // Set From: header field of the header.
+        message.setFrom(new InternetAddress(from));
+        // Set Subject: header field
+        message.setSubject(emailSubject);
+        // Now set the actual message
+        message.setText(emailBody);
 
-            long startTime = System.currentTimeMillis();
-            int i = 0;
-            int size = setEmails.size();
+        if (fileAddress[0] != "") {
+            message.setFileName(fileAddress[0]);
+        }
 
-            for (Iterator<String> it = setEmails.iterator(); it.hasNext(); ) {
-                String receiver = it.next();
+        long startTime = System.currentTimeMillis();
+        int i = 0;
+        int size = setEmails.size();
 
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
-                Transport.send(message);
+        for (Iterator<String> it = setEmails.iterator(); it.hasNext(); ) {
+            String receiver = it.next();
+
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+            Transport.send(message);
 
                 i++;
                 ProgressLine.PrintProgress(startTime, size, i);
             }
 
-
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
-        }
 
     }
 

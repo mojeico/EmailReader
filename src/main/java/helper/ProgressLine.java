@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 
 public class ProgressLine {
 
-
     public static void PrintProgress(long startTime, long total, long current) {
 
         long eta = current == 0 ? 0 :
