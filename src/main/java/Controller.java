@@ -29,14 +29,14 @@ public class Controller {
                     pop3.getMessage(setEmails);
                 } catch (NoSuchProviderException e) {
                     System.out.println(e.getMessage());
-                    return "(NoSuchProviderException) - Error in ReceiveMailPop3 with getting emails from" + email.getPop3().getEmail();
+                    return "(NoSuchProviderException) - Error in ReceiveMailPop3 with getting emails from " + email.getPop3().getEmail();
                 } catch (MessagingException e) {
                     System.out.println(e.getMessage());
                     e.printStackTrace();
-                    return "(MessagingException) - Error in ReceiveMailPop3 with getting emails from" + email.getPop3().getEmail();
+                    return "(MessagingException) - Error in ReceiveMailPop3 with getting emails from " + email.getPop3().getEmail();
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
-                    return "(Exception) - Error in ReceiveMailPop3 with getting emails from" + email.getPop3().getEmail();
+                    return "(Exception) - Error in ReceiveMailPop3 with getting emails from " + email.getPop3().getEmail();
                 }
                 System.out.println("\nFinish getting pop3 emails address for " + email.getPop3().getEmail());
             }
@@ -49,13 +49,13 @@ public class Controller {
                     imap.getMessage(setEmails);
                 } catch (NoSuchProviderException e) {
                     System.out.println(e.getMessage());
-                    return "(NoSuchProviderException) - Error in ReceiveMailImap with getting emails from" + email.getImap().getEmail();
+                    return "(NoSuchProviderException) - Error in ReceiveMailImap with getting emails from " + email.getImap().getEmail();
                 } catch (MessagingException e) {
                     System.out.println(e.getMessage());
-                    return "(MessagingException) - Error in ReceiveMailImap with getting emails from" + email.getImap().getEmail();
+                    return "(MessagingException) - Error in ReceiveMailImap with getting emails from " + email.getImap().getEmail();
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
-                    return "(Exception) - Error in ReceiveMailImap with getting emails from" + email.getImap().getEmail();
+                    return "(Exception) - Error in ReceiveMailImap with getting emails from " + email.getImap().getEmail();
                 }
                 System.out.println("\nFinish getting imap emails address for " + email.getImap().getEmail());
             }
@@ -70,10 +70,10 @@ public class Controller {
                 sendMail.SendMailTo(setEmails, emailBody, emailSubject, fileAddress);
             } catch (MessagingException e) {
                 System.out.println(e.getMessage());
-                return "(Exception) - Error in SendMailTo with sending emails from" + email.getSmtp().getEmail();
+                return "(Exception) - Error in SendMailTo with sending emails from " + email.getSmtp().getEmail();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-                return "(Exception) - Error in SendMailTo with sending emails from" + email.getSmtp().getEmail();
+                return "(Exception) - Error in SendMailTo with sending emails from " + email.getSmtp().getEmail();
             }
 
             System.out.println("\nFinish sending emails by " + email.getSmtp().getEmail());
@@ -81,6 +81,6 @@ public class Controller {
             setEmails.clear();
         }
 
-        return "OK";
+        return "Mails was sent";
     }
 }
