@@ -14,7 +14,7 @@ public class Controller {
 
     public static String RunMainLogic(String emailBody, String emailSubject, String[] fileAddress) {
 
-        JSONReadFromFile jsonReadFromFile = new JSONReadFromFile("./jsonExample.json");
+        JSONReadFromFile jsonReadFromFile = new JSONReadFromFile(fileAddress[1]);
         List<Email> emailList = jsonReadFromFile.ParseJsonEmail();
 
 

@@ -3,25 +3,50 @@
     {
       "pop3": {
         "email": "g.mojeico@gmail.com",
-        "pass": "yxopbbmxjmktzqao",
+        "pass": "jrferonfeof",
         "host": "smtp.gmail.com",
         "port": 995,
         "ssl": true
       },
       "imap": {
         "email": "g.mojeico@gmail.com",
-        "pass": "yxopbbmxjmktzqao",
+        "pass": "wergegerg",
         "host": "imap.gmail.com",
         "port": 123,
         "ssl": true
       },
       "smtp": {
         "email": "g.mojeico@gmail.com",
-        "pass": "yxopbbmxjmktzqao",
+        "pass": "ergergerg",
+        "host": "smtp.gmail.com",
+        "port": 465,
+        "ssl": true
+      }
+    },
+
+    {
+      "pop3": {
+        "email": "g.mojeico@gmail.com",
+        "pass": "ewrg",
+        "host": "smtp.gmail.com",
+        "port": 995,
+        "ssl": true
+      },
+      "imap": {
+        "email": "g.mojeico@gmail.com",
+        "pass": "ergerg",
+        "host": "imap.gmail.com",
+        "port": 123,
+        "ssl": true
+      },
+      "smtp": {
+        "email": "g.mojeico@gmail.com",
+        "pass": "ergerge",
         "host": "smtp.gmail.com",
         "port": 465,
         "ssl": true
       }
     }
+
   ]
 }

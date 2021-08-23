@@ -47,12 +47,10 @@ public class Main extends Application {
         GridPane.setConstraints(textMail, 0, 4);
 
 
-        Label label = new Label("File:");
-        TextField tf = new TextField();
-        Button btn = new Button("Browse");
+        Button btn = new Button("Attachment");
         FileChooser fileChooser = new FileChooser();
 
-        final String[] fileAddress = {""};
+        final String[] fileAddress = {"",""};
 
 
         btn.setOnAction(e ->
@@ -64,9 +62,20 @@ public class Main extends Application {
         });
 
 
-        GridPane.setConstraints(label, 0, 5);
-        GridPane.setConstraints(tf, 0, 6);
-        GridPane.setConstraints(btn, 0, 7);
+        Button btnAddress = new Button("Json address List");
+        FileChooser fileChooserAddress = new FileChooser();
+
+        btnAddress.setOnAction(e ->
+        {
+            fileChooserAddress.setTitle("Open File");
+            File selectedDirectory = fileChooserAddress.showOpenDialog(primaryStage);
+            System.out.println(selectedDirectory.getAbsolutePath());
+            fileAddress[1] = selectedDirectory.getAbsolutePath();
+        });
+
+
+        GridPane.setConstraints(btn, 0, 6);
+        GridPane.setConstraints(btnAddress, 0, 7);
 
 
         Button button = new Button("Start");
@@ -79,12 +88,13 @@ public class Main extends Application {
             }
         });
 
+
         GridPane.setConstraints(button, 0, 8);
 
         list = new Label();
         GridPane.setConstraints(list, 0, 9);
 
-        grip.getChildren().addAll(subject, textMail, button, btn, textLable, subjectLable, list);
+        grip.getChildren().addAll(subject, textMail, button, btn, btnAddress, textLable, subjectLable, list);
 
         Scene scene = new Scene(grip, 600, 400);
         window.setScene(scene);
